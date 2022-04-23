@@ -25,6 +25,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
+    private var mCorrectAnswer = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,9 +130,10 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             
                             val intent = Intent(this, ResultActivity::class.java)
                             intent.putExtra(Constants.USER_NAME, mUsername)
-                            intent.putExtra(Constants.CORRECT_ANSWER,"")
+                            intent.putExtra(Constants.CORRECT_ANSWER,mCorrectAnswer)
                             intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
                             startActivity(intent)
+                            finish()
                         }
                     }
                 } else {
@@ -142,7 +144,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         answerView(
                             mSelectedOptionPosition,
                             R.drawable.wrong_option_border_bg)
-                    }
+                    }else
+                        mCorrectAnswer++
 
                     // This is for correct answer
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
