@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
             if (et_name.text.isEmpty()) {
                 et_name.error = "Please Enter your name"
             } else {
-                startActivity(Intent(this, QuizQuestionsActivity::class.java))
+                val intent = Intent(this, QuizQuestionsActivity::class.java)
+                intent.putExtra(Constants.USER_NAME,et_name.text)
+                startActivity(intent)
                 finish()
             }
         }

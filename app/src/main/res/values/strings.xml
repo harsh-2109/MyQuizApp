@@ -9,4 +9,7 @@
     <string name="image_of_the_flag">image of the flag</string>
     <string name="_0_9">0/10</string>
     <string name="submit">SUBMIT</string>
+    <string name="result">Result</string>
+    <string name="congratulation">Hey, Congratulation</string>
+    <string name="finish">FINISH</string>
 </resources>
