@@ -1,5 +1,6 @@
 package com.hpandya.myquizapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -18,6 +19,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvOptionThree: TextView
     private lateinit var tvOptionFour: TextView
     private lateinit var btnSubmit: Button
+
+    private var mUsername: String? = null
 
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
@@ -38,6 +41,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         btnSubmit = findViewById(R.id.btn_submit)
 
         mQuestionsList = Constants.getQuestions()
+
+        mUsername = intent.getStringExtra(Constants.USER_NAME)
 
         setQuestion()
 
@@ -121,6 +126,12 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                                 "You have successfully completed the quiz.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            
+                            val intent = Intent(this, ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUsername)
+                            intent.putExtra(Constants.CORRECT_ANSWER,"")
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            startActivity(intent)
                         }
                     }
                 } else {
